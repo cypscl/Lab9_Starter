@@ -95,13 +95,118 @@
       let firstNum = document.querySelector('#first-num').value;
       let secondNum = document.querySelector('#second-num').value;
       let operator = document.querySelector('#operator').value;
-      output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+
+      try {
+        output.innerHTML = eval(`${firstNum} ${operator} ${secondNum}`);
+      }catch(error){
+        console.error(error);
+      }
     });
 
     let errorBtns = Array.from(document.querySelectorAll('#error-btns > button'));
 
     // Start your code here
     // You may move this JS to another file if you wish
+
+    errorBtns[0].addEventListener('click', () => {
+      console.log('Console Log');
+    });
+
+    errorBtns[1].addEventListener('click', () => {
+      console.error('Console Error');
+    });
+
+    errorBtns[2].addEventListener('click', () => {
+      console.count('Console Count');
+    });
+
+    errorBtns[3].addEventListener('click', () => {
+      console.warn('Console Warn');
+    });
+
+    errorBtns[4].addEventListener('click', () => {
+      console.assert(Math.random() >= 2, 'Console Assert: Random number is smaller than 2');
+    });
+
+    errorBtns[5].addEventListener('click', () => {
+      console.clear();
+    });
+
+    errorBtns[6].addEventListener('click', () => {
+      console.dir(document);
+    });
+
+    errorBtns[7].addEventListener('click', () => {
+      console.dirxml(document);
+    });
+
+    errorBtns[8].addEventListener('click', () => {
+      console.group('Console Group Start');
+      console.log('Console Group Start 1');
+      console.log('Console Group Start 2');
+      console.log('Console Group Start 3');
+      console.groupEnd();
+    });
+
+    errorBtns[9].addEventListener("click", () => {
+      console.group('Console Group End');
+      console.log('Console Group End 1');
+      console.groupEnd();
+
+    })
+
+    errorBtns[10].addEventListener('click', () => {
+      console.table([{
+          name: 'John',
+          age: 20
+        },
+        {
+          name: 'Jane',
+          age: 21
+        },
+        {
+          name: 'Joe',
+          age: 22
+        }
+      ]);
+    });
+
+    errorBtns[11].addEventListener('click', () => {
+      console.time('Start Timer');
+    });
+
+    errorBtns[12].addEventListener('click', () => {
+      console.timeEnd('Start Timer');
+    });
+
+    errorBtns[13].addEventListener('click', () => {
+      function deep(){
+        function deepest(){
+          console.trace('Console Trace');
+        }
+        deepest();
+      }
+      deep();
+
+    });
+
+    class CustomError extends Error {
+      constructor(message) {
+        super(message);
+        this.name = 'CustomError';
+      }
+    }
+    errorBtns[14].addEventListener('click', () => {
+      try {
+        notFunction();
+      } catch (error) {
+        console.error("ERROR:",error);
+        throw new CustomError('Trigger a Custom Error');
+      } finally {
+        console.log('Finally, always executed');
+      }
+    });
+
   </script>
 </body>
 
